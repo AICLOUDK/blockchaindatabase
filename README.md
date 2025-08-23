@@ -1,2 +1,2 @@
 # wweeb.github.io
-web : https://aicloudk.github.io/Wweeb/
+web : https://aicloudk.github.io/wweeb/
