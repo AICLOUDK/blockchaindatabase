@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Blockchain Dashboard</title>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div id="particles-js"></div>
+<div class="container">
+  {% if 'user' in session %}
+    <h2>Welcome, {{ session['user'] }}</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  {% else %}
+    <h2>Please Login or Register</h2>
+    <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a>
+  {% endif %}
+
+  <h3>Blockchain Status</h3>
+  <p>Status: {{ blockchain_status }}</p>
+  <p>Latest Hash: {{ latest_hash }}</p>
+
+  {% if 'user' in session %}
+  <h3>Make a Transaction</h3>
+  <form method="POST" action="{{ url_for('create_transaction') }}">
+    Receiver: <input type="text" name="receiver" required />
+    Amount: <input type="number" step="0.01" name="amount" required />
+    <button type="submit">Send</button>
+  </form>
+
+  <h3>Your Transactions</h3>
+  {% if transactions %}
+  <table>
+    <tr><th>No.</th><th>Sender</th><th>Receiver</th><th>Amount</th><th>Timestamp</th></tr>
+    {% for tx in transactions %}
+    <tr>
+      <td>{{ tx[0] }}</td>
+      <td>{{ tx[1] }}</td>
+      <td>{{ tx[2] }}</td>
+      <td>{{ tx[3] }}</td>
+      <td>{{ tx[4] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+    <p>No transactions found.</p>
+  {% endif %}
+  {% endif %}
+</div>
+<script>
+  particlesJS.load('particles-js', '{{ url_for("static", filename="particles.json") }}', function() {
+    console.log('Particles loaded');
+  });
+</script>
+</body>
+</html>
