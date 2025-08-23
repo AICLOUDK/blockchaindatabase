@@ -1,0 +1,16 @@
+your-project/
+│
+├── static/
+│   ├── style.css
+│   ├── particles.json
+│   └── logo.png (optional logo)
+│
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   └── register.html
+│
+├── main.py
+├── block.py
+├── requirements.txt
+└── README.md
